@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  postgres-books:
+    container_name: postgres_books
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=root
+    ports:
+      - 5436:5432
+    image: postgres
+    volumes:
+      - db-data-books:/var/lib/postgresql/data
+
+volumes:
+  db-data-books:
