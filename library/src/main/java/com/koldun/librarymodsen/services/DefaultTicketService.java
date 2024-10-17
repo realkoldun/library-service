@@ -1,9 +1,12 @@
 package com.koldun.librarymodsen.services;
 
-import com.koldun.librarymodsen.controller.TicketRequest;
+import com.koldun.librarymodsen.controller.ticket.TicketRequest;
 import com.koldun.librarymodsen.entities.BookEntity;
 import com.koldun.librarymodsen.entities.TicketEntity;
-import com.koldun.librarymodsen.interfaces.*;
+import com.koldun.librarymodsen.interfaces.book.BookRepository;
+import com.koldun.librarymodsen.interfaces.ticket.TicketRepositoty;
+import com.koldun.librarymodsen.interfaces.ticket.TicketService;
+import com.koldun.librarymodsen.interfaces.ticket.TicketToEntityMapper;
 import com.koldun.librarymodsen.model.Ticket;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

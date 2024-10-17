@@ -1,6 +1,6 @@
-package com.koldun.librarymodsen.interfaces;
+package com.koldun.librarymodsen.interfaces.ticket;
 
-import com.koldun.librarymodsen.controller.TicketRequest;
+import com.koldun.librarymodsen.controller.ticket.TicketRequest;
 import com.koldun.librarymodsen.model.Ticket;
 import org.mapstruct.Mapper;
 

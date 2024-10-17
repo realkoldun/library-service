@@ -1,4 +1,4 @@
-package com.koldun.librarymodsen.interfaces;
+package com.koldun.librarymodsen.interfaces.book;
 
 import com.koldun.librarymodsen.entities.BookEntity;
 import org.springframework.data.repository.CrudRepository;

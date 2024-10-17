@@ -1,4 +1,4 @@
-package com.koldun.librarymodsen.interfaces;
+package com.koldun.librarymodsen.interfaces.ticket;
 
 import com.koldun.librarymodsen.entities.TicketEntity;
 import com.koldun.librarymodsen.model.Ticket;

@@ -1,4 +1,4 @@
-package com.koldun.librarymodsen.controller;
+package com.koldun.librarymodsen.controller.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

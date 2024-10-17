@@ -1,6 +1,6 @@
-package com.koldun.librarymodsen.interfaces;
+package com.koldun.librarymodsen.interfaces.book;
 
-import com.koldun.librarymodsen.controller.BookRequest;
+import com.koldun.librarymodsen.controller.book.BookRequest;
 import com.koldun.librarymodsen.model.Book;
 
 import java.util.List;
@@ -10,5 +10,6 @@ public interface BookService {
     List<Book> getAllBooks();
     void addBook(BookRequest book);
     Book getBookByISBN(Long isbn);
+    Book updateBook(Long id, BookRequest book);
 }
 
