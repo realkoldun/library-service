@@ -1,6 +1,5 @@
 package com.koldun.librarymodsen.controller.book;
 
-import com.koldun.librarymodsen.interfaces.book.BookRepository;
 import com.koldun.librarymodsen.interfaces.book.BookService;
 import com.koldun.librarymodsen.model.Book;
 import lombok.RequiredArgsConstructor;
