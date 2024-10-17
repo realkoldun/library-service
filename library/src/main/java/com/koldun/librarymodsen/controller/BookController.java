@@ -13,14 +13,20 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
-    @GetMapping
+    @GetMapping("/isbn/{isbn}")
+    public Book getBookByISBN(@PathVariable String isbn) {
+        return bookService.getBookByISBN(Long.parseLong(isbn));
+    }
+    @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
+
+
     @PostMapping
     public void createBook(@RequestBody BookRequest request) {
         System.out.println(request.toString());

@@ -9,5 +9,6 @@ public interface BookService {
     Book getBookById(Long id);
     List<Book> getAllBooks();
     void addBook(BookRequest book);
+    Book getBookByISBN(Long isbn);
 }
 

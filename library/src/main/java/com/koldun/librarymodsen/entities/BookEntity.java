@@ -13,11 +13,13 @@ public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
+    @Column(nullable=false)
     private Long ISBN;
+    @Column(nullable=false)
     private String title;
     private String genre;
     private String description;
+    @Column(nullable=false)
     private String author;
 }
 

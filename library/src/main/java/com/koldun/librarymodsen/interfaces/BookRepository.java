@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookRepository extends CrudRepository<BookEntity, Long> {
+    BookEntity findByISBN(Long ISBN);
 }
 

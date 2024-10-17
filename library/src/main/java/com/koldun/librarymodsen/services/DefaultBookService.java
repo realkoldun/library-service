@@ -5,9 +5,9 @@ import com.koldun.librarymodsen.interfaces.BookToDtoMapper;
 import com.koldun.librarymodsen.interfaces.BookToEntityMapper;
 import com.koldun.librarymodsen.model.Book;
 import com.koldun.librarymodsen.entities.BookEntity;
-import com.koldun.librarymodsen.exceptions.BookNotFoundException;
 import com.koldun.librarymodsen.interfaces.BookRepository;
 import com.koldun.librarymodsen.interfaces.BookService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class DefaultBookService implements BookService {
     public Book getBookById(Long id) {
         BookEntity bookEntity = bookRepository
                 .findById(id)
-                .orElseThrow(() -> new BookNotFoundException("Book not found: ISBN = " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Book not found: id = " + id));
         return mapper.bookEntityToBook(bookEntity);
     }
 
@@ -43,5 +43,13 @@ public class DefaultBookService implements BookService {
     public void addBook(BookRequest bookRequest) {
         Book book = dtoMapper.AddBookRequestToBook(bookRequest);
         bookRepository.save(mapper.bookToBookEntity(book));
+    }
+
+    @Override
+    public Book getBookByISBN(Long isbn) {
+        BookEntity bookEntity = bookRepository
+                .findByISBN(isbn);
+        if (bookEntity == null) throw new EntityNotFoundException("Book not found: ISBN = " + isbn);
+        return mapper.bookEntityToBook(bookEntity);
     }
 }
