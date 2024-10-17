@@ -14,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
-    private final BookRepository bookRepository;
 
     @GetMapping("/id/{id}")
     public Book getBookById(@PathVariable Long id) {
