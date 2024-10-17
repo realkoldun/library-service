@@ -1,5 +1,6 @@
 package com.koldun.librarymodsen.controller.book;
 
+import com.koldun.librarymodsen.interfaces.book.BookRepository;
 import com.koldun.librarymodsen.interfaces.book.BookService;
 import com.koldun.librarymodsen.model.Book;
 import lombok.RequiredArgsConstructor;
@@ -13,22 +14,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
+    private final BookRepository bookRepository;
 
     @GetMapping("/id/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
-
     @GetMapping("/isbn/{isbn}")
     public Book getBookByISBN(@PathVariable String isbn) {
         return bookService.getBookByISBN(Long.parseLong(isbn));
     }
+
     @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
-
-    @PostMapping("/id/{id}")
+    @PostMapping("/update/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody BookRequest bookRequest) {
         Book updatedBook = bookService.updateBook(id, bookRequest);
         return ResponseEntity.ok(updatedBook);

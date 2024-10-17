@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+</head>
+<body>
+<button onclick="loadBooks()">Load Books</button>
+<table id="booksTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Description</th>
+        <th>Author</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<table id="ticketsTable">
+    <thead>
+    <tr>
+        <th>Book ID</th>
+        <th>Taken Date</th>
+        <th>Return Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    function loadBooks() {
+        fetch("/books/all")
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('booksTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+                data.forEach(book => {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).innerHTML = book.id;
+                    row.insertCell(1).innerHTML = book.ISBN;
+                    row.insertCell(2).innerHTML = book.title;
+                    row.insertCell(3).innerHTML = book.genre;
+                    row.insertCell(4).innerHTML = book.description;
+                    row.insertCell(5).innerHTML = book.author;
+                });
+            })
+        fetch("/tickets/all")
+            .then(response => response.json())
+            .then(data2 => {
+                const tableBody2 = document.getElementById('ticketsTable').getElementsByTagName('tbody')[0];
+                tableBody2.innerHTML = '';
+                data2.forEach(ticket => {
+                    const row = tableBody2.insertRow();
+                    row.insertCell(0).innerHTML = ticket.book.id;
+                    row.insertCell(1).innerHTML = ticket.takenDate;
+                    row.insertCell(2).innerHTML = ticket.returnDate;
+                });
+            })
+    }
+</script>
+</body>
+</html>
