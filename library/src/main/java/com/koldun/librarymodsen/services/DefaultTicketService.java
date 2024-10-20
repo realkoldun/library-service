@@ -21,7 +21,6 @@ public class DefaultTicketService implements TicketService {
     private final TicketRepository ticketRepository;
     private final BookRepository bookRepository;
     private final TicketToEntityMapper mapper;
-    //private final TicketToDtoMapper dtoMapper;
 
     @Override
     public Ticket getTicketById(Long id) {
