@@ -1,7 +1,6 @@
 package com.koldun.librarymodsen.interfaces.book;
 
 import com.koldun.librarymodsen.entities.BookEntity;
-import com.koldun.librarymodsen.model.Book;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
