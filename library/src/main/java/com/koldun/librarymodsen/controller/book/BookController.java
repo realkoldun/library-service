@@ -2,6 +2,7 @@ package com.koldun.librarymodsen.controller.book;
 
 import com.koldun.librarymodsen.interfaces.book.BookService;
 import com.koldun.librarymodsen.model.Book;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/books")
 @RequiredArgsConstructor
+@Tag(name="Book Controller", description = "How to interact with books")
 public class BookController {
     private final BookService bookService;
 
@@ -32,9 +34,8 @@ public class BookController {
         Book updatedBook = bookService.updateBook(id, bookRequest);
         return ResponseEntity.ok(updatedBook);
     }
-    @PostMapping
-    public void createBook(@RequestBody BookRequest bookRequest) {
-        //System.out.println(bookRequest.toString());
+    @PostMapping("/add")
+    public void addBook(@RequestBody BookRequest bookRequest) {
         bookService.addBook(bookRequest);
     }
 }

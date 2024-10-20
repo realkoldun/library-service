@@ -37,8 +37,13 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'mysql:mysql-connector-java'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.3.4'
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.25'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+

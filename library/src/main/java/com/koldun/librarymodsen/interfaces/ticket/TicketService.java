@@ -9,5 +9,5 @@ public interface TicketService {
     Ticket getTicketById(Long id);
     void setTicket(TicketRequest ticketRequest);
     List<Ticket> getAllTickets();
-    void setTicketDate(TicketRequest ticketRequest);
+    Ticket setTicketDate(TicketRequest ticketRequest);
 }

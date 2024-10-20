@@ -54,7 +54,13 @@ public class DefaultTicketService implements TicketService {
     }
 
     @Override
-    public void setTicketDate(TicketRequest ticketRequest) {
-
+    public Ticket setTicketDate(TicketRequest ticketRequest) {
+        TicketEntity ticketEntity = ticketRepository
+                .findById(ticketRequest.getBookId())
+                .orElseThrow(() -> new EntityNotFoundException("Ticket not found: = " + ticketRequest.getBookId()));
+        ticketEntity.setTakenDate(ticketRequest.getTakenDate());
+        ticketEntity.setReturnDate(ticketRequest.getReturnDate());
+        ticketRepository.save(ticketEntity);
+        return mapper.ticketEntityToTicket(ticketEntity);
     }
 }
