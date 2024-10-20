@@ -1,7 +1,7 @@
 package com.koldun.librarymodsen.model;
 
 public record Book(Long id,
-                   Long ISBN,
+                   String ISBN,
                    String title,
                    String genre,
                    String description,

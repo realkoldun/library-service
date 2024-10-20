@@ -23,6 +23,10 @@ public class TicketController {
     public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
     }
+    @GetMapping("/free")
+    public List<Ticket> getFreeBooks() {
+        return ticketService.getFreeBooks();
+    }
     @PostMapping("/update")
     public ResponseEntity<Ticket> setTicketDate(@RequestBody TicketRequest ticketRequest) {
         Ticket ticket = ticketService.setTicketDate(ticketRequest);

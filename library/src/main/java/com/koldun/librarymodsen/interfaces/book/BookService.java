@@ -9,7 +9,9 @@ public interface BookService {
     Book getBookById(Long id);
     List<Book> getAllBooks();
     void addBook(BookRequest book);
-    Book getBookByISBN(Long isbn);
+    Book getBookByISBN(String isbn);
     Book updateBook(Long id, BookRequest book);
+    Book deleteBook(Long id);
+    List<Book> getFreeBooks();
 }
 

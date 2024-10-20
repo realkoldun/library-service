@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class BookRequest {
-    private Long ISBN;
+    private String ISBN;
     private String title;
     private String genre;
     private String description;

@@ -4,9 +4,10 @@ import com.koldun.librarymodsen.controller.ticket.TicketRequest;
 import com.koldun.librarymodsen.entities.BookEntity;
 import com.koldun.librarymodsen.entities.TicketEntity;
 import com.koldun.librarymodsen.interfaces.book.BookRepository;
-import com.koldun.librarymodsen.interfaces.ticket.TicketRepositoty;
+import com.koldun.librarymodsen.interfaces.ticket.TicketRepository;
 import com.koldun.librarymodsen.interfaces.ticket.TicketService;
 import com.koldun.librarymodsen.interfaces.ticket.TicketToEntityMapper;
+import com.koldun.librarymodsen.model.Book;
 import com.koldun.librarymodsen.model.Ticket;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DefaultTicketService implements TicketService {
-    private final TicketRepositoty ticketRepository;
+    private final TicketRepository ticketRepository;
     private final BookRepository bookRepository;
     private final TicketToEntityMapper mapper;
     //private final TicketToDtoMapper dtoMapper;
@@ -62,5 +63,18 @@ public class DefaultTicketService implements TicketService {
         ticketEntity.setReturnDate(ticketRequest.getReturnDate());
         ticketRepository.save(ticketEntity);
         return mapper.ticketEntityToTicket(ticketEntity);
+    }
+
+    @Override
+    public List<Ticket> getFreeBooks() {
+        Iterable<BookEntity> bookEntities = bookRepository.findBooksWithoutDates();
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        for (BookEntity bookEntity : bookEntities) {
+            TicketEntity ticketEntity = ticketRepository
+                    .findById(bookEntity.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Ticket not found: = " + bookEntity.getId()));
+            tickets.add(mapper.ticketEntityToTicket(ticketEntity));
+        }
+        return tickets;
     }
 }

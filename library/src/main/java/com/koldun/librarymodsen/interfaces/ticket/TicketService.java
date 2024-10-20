@@ -10,4 +10,5 @@ public interface TicketService {
     void setTicket(TicketRequest ticketRequest);
     List<Ticket> getAllTickets();
     Ticket setTicketDate(TicketRequest ticketRequest);
+    List<Ticket> getFreeBooks();
 }

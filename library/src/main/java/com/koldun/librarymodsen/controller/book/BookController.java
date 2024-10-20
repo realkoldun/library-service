@@ -22,18 +22,27 @@ public class BookController {
     }
     @GetMapping("/isbn/{isbn}")
     public Book getBookByISBN(@PathVariable String isbn) {
-        return bookService.getBookByISBN(Long.parseLong(isbn));
+        return bookService.getBookByISBN(isbn);
     }
-
     @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
+    }
+    @GetMapping("/free")
+    public List<Book> getFreeBooks() {
+        return bookService.getFreeBooks();
     }
     @PostMapping("/update/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody BookRequest bookRequest) {
         Book updatedBook = bookService.updateBook(id, bookRequest);
         return ResponseEntity.ok(updatedBook);
     }
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<Book> deleteBook(@PathVariable Long id) {
+        Book deletedBook = bookService.deleteBook(id);
+        return ResponseEntity.ok(deletedBook);
+    }
+
     @PostMapping("/add")
     public void addBook(@RequestBody BookRequest bookRequest) {
         bookService.addBook(bookRequest);
