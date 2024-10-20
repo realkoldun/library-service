@@ -9,7 +9,6 @@ import com.koldun.librarymodsen.model.Book;
 import com.koldun.librarymodsen.entities.BookEntity;
 import com.koldun.librarymodsen.interfaces.book.BookRepository;
 import com.koldun.librarymodsen.interfaces.book.BookService;
-import com.koldun.librarymodsen.model.Ticket;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
