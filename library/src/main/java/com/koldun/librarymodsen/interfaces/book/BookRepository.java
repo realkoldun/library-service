@@ -11,10 +11,7 @@ import java.util.List;
 public interface BookRepository extends CrudRepository<BookEntity, Long> {
     BookEntity findByISBN(String ISBN);
     void deleteById(Long id);
-    @Query("SELECT b FROM BookEntity b " +
-            "WHERE b.id NOT IN " +
-            "(SELECT t.book.id FROM TicketEntity t " +
-            "WHERE t.takenDate IS NOT NULL AND t.returnDate IS NOT)")
+    @Query("SELECT b FROM BookEntity b WHERE b.id NOT IN (SELECT t.book.id FROM TicketEntity t WHERE t.takenDate IS NOT NULL AND t.returnDate IS NOT NULL)")
     List<BookEntity> findBooksWithoutDates();
 }
 
