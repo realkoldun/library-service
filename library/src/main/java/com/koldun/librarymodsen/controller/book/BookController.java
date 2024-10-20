@@ -16,27 +16,36 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
+    /**GetMapping
+     */
     @GetMapping("/id/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
+
     @GetMapping("/isbn/{isbn}")
     public Book getBookByISBN(@PathVariable String isbn) {
         return bookService.getBookByISBN(isbn);
     }
+
     @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
+
     @GetMapping("/free")
     public List<Book> getFreeBooks() {
         return bookService.getFreeBooks();
     }
+
+    /**PostMapping
+     */
     @PostMapping("/update/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody BookRequest bookRequest) {
         Book updatedBook = bookService.updateBook(id, bookRequest);
         return ResponseEntity.ok(updatedBook);
     }
+
     @PostMapping("/delete/{id}")
     public ResponseEntity<Book> deleteBook(@PathVariable Long id) {
         Book deletedBook = bookService.deleteBook(id);

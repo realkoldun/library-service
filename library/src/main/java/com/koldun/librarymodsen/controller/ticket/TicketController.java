@@ -15,23 +15,30 @@ import java.util.List;
 @Tag(name="Ticket Controller", description = "How to interact with Tickets")
 public class TicketController {
     private final TicketService ticketService;
+
+    //GetMapping
     @GetMapping("/id")
     public Ticket getTicketById(@RequestParam Long id) {
         return ticketService.getTicketById(id);
     }
+
     @GetMapping("/all")
     public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
     }
+
     @GetMapping("/free")
     public List<Ticket> getFreeBooks() {
         return ticketService.getFreeBooks();
     }
+
+    //PostMapping
     @PostMapping("/update")
     public ResponseEntity<Ticket> setTicketDate(@RequestBody TicketRequest ticketRequest) {
         Ticket ticket = ticketService.setTicketDate(ticketRequest);
         return ResponseEntity.ok(ticket);
     }
+
     @PostMapping
     void addTicket(@RequestBody TicketRequest ticketRequest) {
         ticketService.setTicket(ticketRequest);
