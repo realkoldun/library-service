@@ -21,13 +21,16 @@ public class DefaultTicketService implements TicketService {
     private final TicketRepository ticketRepository;
     private final BookRepository bookRepository;
     private final TicketToEntityMapper mapper;
-    //private final TicketToDtoMapper dtoMapper;
+
+    private TicketEntity findTicketEntityById(Long id) {
+        return ticketRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ticket not found: = " + id));
+    }
 
     @Override
     public Ticket getTicketById(Long id) {
-        TicketEntity ticketEntity = ticketRepository
-                .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Ticket not found: = " + id));
+        TicketEntity ticketEntity = findTicketEntityById(id);
         return mapper.ticketEntityToTicket(ticketEntity);
     }
 
@@ -55,9 +58,7 @@ public class DefaultTicketService implements TicketService {
 
     @Override
     public Ticket setTicketDate(TicketRequest ticketRequest) {
-        TicketEntity ticketEntity = ticketRepository
-                .findById(ticketRequest.getBookId())
-                .orElseThrow(() -> new EntityNotFoundException("Ticket not found: = " + ticketRequest.getBookId()));
+        TicketEntity ticketEntity = findTicketEntityById(ticketRequest.getBookId());
         ticketEntity.setTakenDate(ticketRequest.getTakenDate());
         ticketEntity.setReturnDate(ticketRequest.getReturnDate());
         ticketRepository.save(ticketEntity);
@@ -69,9 +70,7 @@ public class DefaultTicketService implements TicketService {
         Iterable<BookEntity> bookEntities = bookRepository.findBooksWithoutDates();
         ArrayList<Ticket> tickets = new ArrayList<>();
         for (BookEntity bookEntity : bookEntities) {
-            TicketEntity ticketEntity = ticketRepository
-                    .findById(bookEntity.getId())
-                    .orElseThrow(() -> new EntityNotFoundException("Ticket not found: = " + bookEntity.getId()));
+            TicketEntity ticketEntity = findTicketEntityById(bookEntity.getId());
             tickets.add(mapper.ticketEntityToTicket(ticketEntity));
         }
         return tickets;

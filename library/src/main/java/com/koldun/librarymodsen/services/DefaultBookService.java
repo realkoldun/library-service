@@ -24,11 +24,15 @@ public class DefaultBookService implements BookService {
     private final BookToDtoMapper dtoMapper;
     private final TicketRepository ticketRepository;
 
-    @Override
-    public Book getBookById(Long id) {
-        BookEntity bookEntity = bookRepository
+    private BookEntity findBookEntityById(Long id) {
+        return bookRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Book not found: id = " + id));
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+        BookEntity bookEntity = findBookEntityById(id);
         return mapper.bookEntityToBook(bookEntity);
     }
 
@@ -61,9 +65,7 @@ public class DefaultBookService implements BookService {
 
     @Override
     public Book updateBook(Long id, BookRequest book) {
-        BookEntity bookEntity = bookRepository
-                .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found: id = " + id));
+        BookEntity bookEntity = findBookEntityById(id);
         bookEntity.setISBN(book.getISBN());
         bookEntity.setAuthor(book.getAuthor());
         bookEntity.setDescription(book.getDescription());
@@ -74,9 +76,7 @@ public class DefaultBookService implements BookService {
     }
     @Override
     public Book deleteBook(Long id) {
-        BookEntity bookEntity = bookRepository
-                .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found: id = " + id));
+        BookEntity bookEntity = findBookEntityById(id);
         try {
             ticketRepository.deleteById(id);
         } catch (Exception e) {
@@ -94,7 +94,5 @@ public class DefaultBookService implements BookService {
             books.add(mapper.bookEntityToBook(bookEntity));
         }
         return books;
-        //return bookRepository.findBooksWithoutDates();
-        //return List.of();
     }
 }
